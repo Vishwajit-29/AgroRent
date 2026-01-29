@@ -14,11 +14,12 @@ spring:
 
 server:
   port: 8080
+  address: 0.0.0.0
 
 # JWT Configuration
 jwt:
   secret: agrorent-secret-key-for-jwt-token-generation-must-be-at-least-256-bits-long-for-security
-  expiration: 86400000  # 24 hours in milliseconds
+  expiration: 86400000 # 24 hours in milliseconds
 
 # CORS Configuration
 cors:
