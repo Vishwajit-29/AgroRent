@@ -4,7 +4,7 @@ spring:
 
   data:
     mongodb:
-      uri: mongodb://localhost:27017/agrorent
+      uri: ${MONGODB_URI:mongodb://localhost:27017/agrorent}
       auto-index-creation: true
 
   servlet:
@@ -14,16 +14,14 @@ spring:
 
 server:
   port: 8080
-  address: 0.0.0.0
-
 # JWT Configuration
 jwt:
-  secret: agrorent-secret-key-for-jwt-token-generation-must-be-at-least-256-bits-long-for-security
+  secret: ${JWT_SECRET:agrorent-secret-key-for-jwt-token-generation-must-be-at-least-256-bits-long-for-security}
   expiration: 86400000 # 24 hours in milliseconds
 
 # CORS Configuration
 cors:
-  allowed-origins: http://localhost:5173,http://localhost:3000
+  allowed-origins: ${CORS_ALLOWED_ORIGINS:http://localhost:5173}
 
 # Logging
 logging:

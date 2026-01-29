@@ -1,0 +1,46 @@
+version: '3.8'
+
+services:
+  mongodb:
+    image: mongo:latest
+    container_name: agrorent-mongodb
+    ports:
+      - "27017:27017"
+    networks:
+      - agrorent-network
+    volumes:
+      - mongo-data:/data/db
+
+  backend:
+    build: ./agrorent-backend
+    container_name: agrorent-backend
+    ports:
+      - "8080:8080"
+    environment:
+      - MONGODB_URI=mongodb://mongodb:27017/agrorent
+      - JWT_SECRET=agrorent-secret-key-for-jwt-token-generation-must-be-at-least-256-bits-long-for-security
+      - CORS_ALLOWED_ORIGINS=http://localhost:5173
+    depends_on:
+      - mongodb
+    networks:
+      - agrorent-network
+
+  frontend:
+    build:
+      context: ./agrorent-frontend
+      args:
+        - VITE_BACKEND_URL=http://localhost:8080
+    container_name: agrorent-frontend
+    ports:
+      - "5173:80"
+    depends_on:
+      - backend
+    networks:
+      - agrorent-network
+
+networks:
+  agrorent-network:
+    external: true
+
+volumes:
+  mongo-data:
