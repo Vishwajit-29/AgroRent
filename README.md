@@ -29,5 +29,4 @@ AgroRent/
 - **Dual Languages**: Seamless Hindi & English support.
 - **Safety**: Users cannot book their own equipment.
 
----
-*Built with ❤️ for Indian Farmers.*
+
